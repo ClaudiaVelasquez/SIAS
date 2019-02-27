@@ -1,0 +1,190 @@
+
+/* Estilos para plugin BXSlider */
+
+.bx-wrapper {
+    margin-bottom: 30px;   
+   -moz-box-shadow: none !important;
+   -webkit-box-shadow: none !important;
+   box-shadow: none !important;
+ }
+ 
+ /* *************************** */
+
+            #pr1 {        
+            background-image: url('../img/PortadaEM.jpg');    
+            background-size:  450px 480px;
+            transition: all .6s ease-in;
+            background-position: 0px, 0px;                   
+            }
+    
+            #pr1:hover {
+                background-size: 480px 510px;            
+                background-position: -5px, -5px;
+                
+            }
+    
+            #pr1:before{
+                background-color: rgba(229, 150, 145, 0.3);
+                content: '';
+                display: inline;
+                height: 480px;
+                position: absolute;
+                left: 0;
+                width: 450px;
+                transition: all .6s ease-in;
+            }
+    
+            #pr1:hover:before{
+                background-color: rgba(229, 150, 145, 0.1);
+                content: '';
+                display: inline;
+                height: 480px;
+                position: absolute;
+                left: 0;
+                width: 450px;
+            }
+    
+    
+            #pr2 {
+            background-image: url('../img/PortadaNW.jpg');    
+            background-size:  450px 480px;
+            transition: all .6s ease-in;
+            background-position: 0px, 0px;
+            }
+    
+            #pr2:hover {
+                background-size: 480px 510px;            
+                background-position: -5px, -5px;
+                       
+            }   
+    
+            #pr2:before{
+                background-color: rgba(229, 150, 145, 0.2);
+                content: '';
+                display: inline;
+                height: 480px;
+                position: absolute;
+                left: 450px;
+                width: 450px;
+                transition: all .6s ease-in;
+            }
+    
+            #pr2:hover:before{
+                background-color: rgba(229, 150, 145, 0.0);
+                content: '';
+                display: inline;
+                height: 480px;
+                position: absolute;
+                left: 451px;
+                width: 450px;
+            }
+    
+    
+    
+    
+            #pr3 {
+            background-image: url('../img/PortadaSC.jpg');    
+            background-size:  450px 480px;
+            transition: all .6s ease-in;
+            background-position: 0px, 0px;
+            }
+    
+            #pr3:hover {
+                background-size: 480px 510px;            
+                background-position: -5px, -5px;
+                                   
+            }   
+    
+            #pr3:before{
+                background-color: rgba(229, 150, 145, 0.3);
+                content: '';
+                display: inline;
+                height: 480px;
+                position: absolute;
+                left: 900px;
+                width: 449px;
+                transition: all .6s ease-in;
+            }
+    
+            #pr3:hover:before{
+                background-color: rgba(229, 150, 145, 0.1);
+                content: '';
+                display: inline;
+                height: 480px;
+                position: absolute;
+                left: 900px;
+                width: 449px;
+            }   
+    
+    
+/* -- Estilo Slider portada ---- */
+
+.slider .indicators .indicator-item.active {
+    background-color: #b56289;
+}
+
+/* Estilo de portada a tamaño pequeño */
+
+@media screen and (max-width:768px){
+    
+    .valign-wrapper {
+        /* display: inline-block;    */
+    }
+
+    #img1{
+        background-position: 70% 25%; 
+    }
+
+    #img2{
+        background-position: 25% 70%; 
+    }
+
+    #txtport2{
+        text-align: left;
+    }
+
+    #pr1:before{
+        content: '';
+        display: block;
+        left: 0px;
+        width: 100%; 
+    }
+
+    #pr1:hover:before{
+        content: '';
+        display: block;
+        left: 0px;
+        width: 100%; 
+    }
+
+    #pr2:before{
+        content: '';
+        display: block;
+        left: 0px;
+        width: 100%; 
+    }
+
+    #pr2:hover:before{
+        content: '';
+        display: block;
+        left: 0px;
+        width: 100%; 
+    }
+
+    #pr3:before{
+        content: '';
+        display: block;
+        left: 0px;
+        width: 100%; 
+    }
+
+    #pr3:hover:before{
+        content: '';
+        display: block;
+        left: 0px;
+        width: 100%; 
+    }
+
+
+}
+

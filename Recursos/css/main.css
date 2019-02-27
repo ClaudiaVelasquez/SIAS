@@ -1,0 +1,113 @@
+
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans|Nunito:600');
+
+body {
+    
+    font-family: 'Nunito', sans-serif;
+
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+
+/* Estilos para barra de menú principal #112d5c */
+
+nav,
+nav .nav-wrapper i,
+nav a.button-collapse,
+nav a.button-collapse i {
+height: 100px;
+line-height: 100px;
+background-color: #1b479a;
+}
+
+nav ul a {
+    color: white;
+}
+
+@media screen and (max-width:768px){
+
+    nav,
+    nav .nav-wrapper i,
+    nav a.button-collapse,
+    nav a.button-collapse i {
+    height: 60px;
+    line-height: 0px;
+    }
+
+    nav img{
+        width: 150px;
+        margin-top: -10px; 
+    }
+
+}
+
+
+/* ------------------------- */
+
+.carousel{
+    height: 100vh;
+}
+
+.carousel .indicators .indicator-item {
+    height: 12px;
+    width: 12px;
+}
+
+/* Estilo para los objetos con alineación vertical */
+
+@media screen and (max-width:768px){
+    .valign-wrapper {
+        display: inline-block;
+    }
+}
+
+
+/* Estilos para controles input */
+
+/* label focus color */
+.input-field input:focus + label , .input-field textarea:focus + label{
+    /* color: #4CAF50 !important; */
+    color: #1b479a !important;    
+  }
+ 
+ i{
+     color: #1b479a !important;
+ }
+ 
+  /* label underline focus color */
+  .row .input-field input:focus , .row .input-field textarea:focus {
+    border-bottom: 1px solid #1b479a !important;
+    box-shadow: 0 1px 0 0 #1b479a !important
+  }     
+ 
+   .row .input-field input .valid{
+    border-bottom: 1px solid #1b479a !important;
+    box-shadow: 0 1px 0 0 #1b479a !important
+  }     
+ 
+   /*
+ input , textarea{
+    color: white;
+ }
+
+  */
+
+ #imenu {
+    color: #424242 !important;
+}
+
+
+
+.swal-button:not([disabled]):hover {
+  background-color: #80df84 !important;
+}
+.swal-button {
+  background-color: #4CAF50 !important;
+}
+
+
