@@ -50,7 +50,7 @@ $app->get('/api-sias/boleta/tipoboleta',  function(Request $request, Response $r
     // $NombreProducto = $request->getParam('NombreProducto');
     // $idTienda = $request->getParam('idTienda');
     
-    $sql = "SELECT * FROM EstadoComprobante WHERE EstadoComprobante_id in('C','A')";
+    $sql = "SELECT * FROM EstadoComprobante WHERE EstadoComprobante_id in('C','P')";
      
     try{
         
@@ -197,4 +197,85 @@ $app->get('/api-sias/boleta/tipoboleta',  function(Request $request, Response $r
     
  });
  
+ // Insertar Comprobante
+
+ $app->post('/api-sias/comprobante/add', function(Request $request, Response $response){
+
+    // $Comprobante_ID = $request->getParam('Comprobante_ID');
+    $TipoComprobante_id = $request->getParam('cbotc');
+    $Cliente_ID = $request->getParam('codigo');
+    $fechcance = $request->getParam('fechcance');
+    $igv = $request->getParam('totaligvac');
+    $total = $request->getParam('totalgeneac');
+    $valorCambio = $request->getParam('tcambio');
+
+    $EstadoComprobante_ID = $request->getParam('cboec');
+    $TipoCobro_id = $request->getParam('cbotcob');
+    $Usuario = $request->getParam('Usuario');
+    
+//    $sql = "INSERT INTO Encuesta (Id_enc,Enc,P1,P1_OTRO,P2,P3)  values($Id_enc,$Enc,$P1,'$P1_OTRO',$P2,$P3)";
+
+    $sql = "INSERT INTO Comprobante (TipoComprobante_id, Cliente_ID, fechcance, igv , total, valorCambio, EstadoComprobante_ID, TipoCobro_id, Usuario) 
+    VALUES ('$TipoComprobante_id', '$Cliente_ID', '$fechcance', '$igv' , '$total', '$valorCambio', '$EstadoComprobante_ID', '$TipoCobro_id', '$Usuario')";
+
+    try{
+        // Get DB Object
+        $db = new db();
+        // Connect
+        $db = $db->connect();
+        $stmt = $db->prepare($sql);
+
+        if($stmt->execute())
+        {
+
+            $ucod=$db->lastInsertId();         
+            echo '{ "Respuesta" : { "Id" : "' . $ucod .'" , "insert" : true } }';
+            //echo json_encode(TRUE);
+        }
+    
+    } catch(PDOException $e){
+        echo '{"error": {"text":  ' . $e->getMessage() . '}';
+        //echo '{ "Respuesta" : [{ "insert" : false }]}';
+    }
+
+});
  
+ // Insertar Comprobante
+
+ $app->post('/api-sias/detacomprobante/add', function(Request $request, Response $response){
+
+    // $Comprobante_ID = $request->getParam('Comprobante_ID');
+    $Comprobante_ID = $request->getParam('Comprobante_ID');
+    $ConceptoCobro_ID = $request->getParam('ConceptoCobro_ID');
+    $cantidad = $request->getParam('cantidad');
+    $importe = $request->getParam('importe');
+    $observa = $request->getParam('observa');
+    
+//    $sql = "INSERT INTO Encuesta (Id_enc,Enc,P1,P1_OTRO,P2,P3)  values($Id_enc,$Enc,$P1,'$P1_OTRO',$P2,$P3)";
+
+    $sql = "INSERT INTO DetaComprobante (TipoComprobante_id, Cliente_ID, fechcance, igv , total, valorCambio, EstadoComprobante_ID, TipoCobro_id, Usuario) 
+    VALUES ('$TipoComprobante_id', '$Cliente_ID', '$fechcance', '$igv' , '$total', '$valorCambio', '$EstadoComprobante_ID', '$TipoCobro_id', '$Usuario')";
+
+    try{
+        // Get DB Object
+        $db = new db();
+        // Connect
+        $db = $db->connect();
+        $stmt = $db->prepare($sql);
+
+        if($stmt->execute())
+        {
+
+            $ucod=$db->lastInsertId();         
+            echo '{ "Respuesta" : [{ "Id" : "' . $ucod .'" , "insert" : true }]}';
+            //echo json_encode(TRUE);
+        }
+    
+    } catch(PDOException $e){
+        echo '{"error": {"text":  ' . $e->getMessage() . '}';
+        //echo '{ "Respuesta" : [{ "insert" : false }]}';
+    }
+
+});
+ 
+

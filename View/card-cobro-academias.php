@@ -1,5 +1,8 @@
 <!-- inicio de card 3 -->
-    
+<form id="form3">
+
+<input type="hidden" name="Usuario" value="JORGE.WINDER">
+ 
 <div class="card white">
             <div class="card-content">
                 <!--<span class="card-title center-align" style="border-left: 7px solid #e85b21;border-right: 7px solid #e85b21;">INGRESAR</span>-->
@@ -46,14 +49,20 @@
 
                         <div class="input-field col l8 s12">
                             <i class="material-icons prefix">business</i>
-                            <input id="nombres3" name="nombres3" type="text" value="" placeholder="Busqueda por nombre &#x1F50D;">
+                            <input id="nombres" name="nombres" type="text" value="" placeholder="Busqueda por nombre &#x1F50D;" readonly>
                             <label for="nombres">Nombre de cliente</label>
                         </div>
 
-                        <div class="input-field col l8 s12">
+                        <div class="input-field col l4 s12">
                             <i class="material-icons prefix">business</i>
                             <input id="dni" type="text" value="" placeholder="Documento de identidad">
                             <label for="dni">DNI / RUC</label>
+                        </div>   
+
+                        <div class="input-field col l4 s12">
+                            <i class="material-icons prefix">business</i>
+                            <input id="tcambio" name="tcambio" type="text" value="1.00" placeholder="Tipo de cambio">
+                            <label for="tcambio">Tipo de cambio</label>
                         </div>                    
 
                         <div class="input-field col l4 s12">
@@ -77,17 +86,6 @@
                                     </thead>
 
                                     <tbody>
-                                    <!-- <tr>
-                                        <td>235</td>
-                                        <td>ACADEMIA DE ITALIANO</td>
-                                        <td>
-                                            <input id="icon_telephone" type="number" class="right-align" value="12">
-                                        </td> 
-                                        <td><input id="icon_telephone" type="text" class="right-align" value="0.00"></td>
-                                        <td><input id="icon_telephone" type="text" class="right-align" value="0.00"></td>
-                                        <td><input id="icon_telephone" type="text" value=""></td>
-                                                                               
-                                    </tr> -->
                                     
                                 
                                     </tbody>
@@ -115,8 +113,8 @@
                                         <td>
                                             <span>Total :</span>
                                         </td> 
-                                        <td><input id="icon_telephone" type="text" class="right-align" value="0.00"></td>
-                                        <td><input id="icon_telephone" type="text" class="right-align" value="0.00"></td>
+                                        <td><input id="totaligvac" name="totaligvac" type="text" class="right-align" value="0.00"></td>
+                                        <td><input id="totalgeneac" name="totalgeneac" type="text" class="right-align" value="0.00"></td>
                                         <td></td>                                                                               
                                         </tr>
                                                                     
@@ -146,7 +144,7 @@
                             <!-- transform: translate(-120px,0px); <a href="#" class="waves-effect waves-light btn" style="width: 100%;background-color: #4CAF50;">Agregar concepto</a> -->
                         </div>
                         <div class="col s12 m8 l8">
-                            <a href="#" class="waves-effect waves-light btn" style="width: 100%;background-color: #4CAF50;">Registrar cobranza</a>
+                            <button id="btnRegistrar3" type="submit" class="waves-effect waves-light btn" style="width: 100%;background-color: #4CAF50;">Registrar cobranza</button>
                         </div>
                                              
                     </div>
@@ -156,3 +154,5 @@
         </div>
 
         <!-- Fin de card 3 -->
+
+</form>           

@@ -4,50 +4,70 @@
 
 
     (async function Load(){
-  
-    
+
+
         async function getData(url){
-  
+
           const response = await fetch(url);
           const data = await response.json();
           return data;
-  
+
         }
 
-        async function postData(url){
-  
-          const response = await fetch(url, 
-            {
-            method: 'POST',
-            body: { "Cliente_id" : "0235401" }
-            }
-          );
+        async function postData(url, form){
 
-          const data = await response.json();
-          return data;
-  
+            const response = await fetch(url,
+              {
+                method: "POST",
+                body: form
+              }
+              )              
+              const data = await response.json()
+              return data              
         }
 
-      
+        // async function postData(url, form){
 
-        // Funciones //
+        //     return await fetch(url,
+        //         {
+        //           method: "POST",
+        //           body: form
+        //         }
+        //         ).then(function(response){
+        //             return response.json();
+        //         }).then(function(obj) {
+        //           //swal("Datos guardados", "Continúe con la siguiente página", "success");
+        //           // if(!obj){
+        //           //     throw "Hubo un error"
+        //           // }                            
+        //           return obj
   
+        //         }).catch(function(error){
+        //           alert(error)
+        //         });
+        //         //return await response.json(); body: JSON.stringify(form),
+        //   }
+
+
+        //========================= Funciones ========================//
+        
+
         async function CargaTipoComprobante() {
-  
+
           const $tc = document.querySelector("#cbotc");
           const lista = await getData("http://localhost:81/SIAS/api-sias/boleta/tipoboleta");
           let txthml = `<option value="" disabled selected>Seleccione comprobante</option>`;
-  
+
           lista.forEach(element => {
             txthml +=  `<option value="${element.TipoComprobante_id}">${element.descrip}</option>`;
           });
 
           $tc.innerHTML= txthml;
-          
+
         }
 
         async function CargaEstadoComprobante() {
-  
+
           const $tc = document.querySelector("#cboec");
           const lista = await getData("http://localhost:81/SIAS/api-sias/boleta/estadocomprobante");
           let txthml = `<option value="" disabled selected>Seleccione</option>`;
@@ -57,11 +77,11 @@
           });
 
           $tc.innerHTML= txthml;
-          
+
         }
 
         async function CargaTipoCobro() {
-  
+
           const $tc = document.querySelector("#cbotcob");
           const lista = await getData("http://localhost:81/SIAS/api-sias/boleta/tipocobro");
           let txthml = `<option value="" disabled selected>Seleccione</option>`;
@@ -71,7 +91,7 @@
           });
 
           $tc.innerHTML= txthml;
-          
+
         }
 
         tipocliente = 0;
@@ -80,23 +100,23 @@
 
             try {
 
-                const lista = await getData("http://localhost:81/SIAS/api-sias/socio/BusquedaCodigo/" + codigo); 
+                const lista = await getData("http://localhost:81/SIAS/api-sias/socio/BusquedaCodigo/" + codigo);
                 console.log(lista);
 
                 lista.forEach(element => {
                     tipocliente = parseInt(element.TipoCliente_ID);
-                    document.querySelector("#nombres3").value = `${element.apellidoP} ${element.apellidoM}, ${element.nombre}`;            
-                    document.querySelector("#dni").value = element.nrodoc;            
+                    document.querySelector("#nombres").value = `${element.apellidoP} ${element.apellidoM}, ${element.nombre}`;
+                    document.querySelector("#dni").value = element.nrodoc;
                 });
-                
+
             } catch (error) {
 
                 // alert("No se encontró el código")
-                
+
                 swal("Algo salió mal", "No se encontró el código", "warning");
-                
-            }          
-          
+
+            }
+
         }
 
         async function BuscarNombreConcepto(nombre) {
@@ -105,11 +125,11 @@
 
                 // Cargar lista de conceptos //
 
-                const lista = await getData("http://localhost:81/SIAS/api-sias/concepto/BusquedaNombre/" + nombre);                 
+                const lista = await getData("http://localhost:81/SIAS/api-sias/concepto/BusquedaNombre/" + nombre);
 
                 let txthml = ``;
                 const $searchresults = document.querySelector(".search-results");
-    
+
                 lista.forEach(element => {
                     txthml +=  `<a data-id="${element.ConceptoCobro_ID}" data-nomcobro="${element.nomcobro}" data-costosoc="${element.costosoc}" data-costonso="${element.costonso}" style="display: block; padding: 10px 0 10px 0;border-bottom: 1px solid #999999" href="javascript:void(0)">${element.nomcobro}</a>`;
                 });
@@ -118,11 +138,11 @@
 
                 // Asignar avento click a cada elemento de la lista de busqueda
 
-                const $searchall = document.querySelectorAll(".search-results a");  
-                
+                const $searchall = document.querySelectorAll(".search-results a");
+
                 $searchall.forEach(element => {
-                    element.addEventListener("click",function(e){                        
-                        
+                    element.addEventListener("click",function(e){
+
                         if(tipocliente===1){
                             let igv = parseFloat((element.dataset.costosoc * 0.18) / 1.18).toFixed(2);
                             setDetalle(element.dataset.id, element.dataset.nomcobro, 1, igv, element.dataset.costosoc, element.dataset.costosoc);
@@ -130,62 +150,61 @@
                             let igv = parseFloat((element.dataset.costonso * 0.18) / 1.18).toFixed(2);
                             setDetalle(element.dataset.id, element.dataset.nomcobro, 1, igv, element.dataset.costonso, element.dataset.costonso);
                         }
-                                                                                          
-                    });    
-                });                            
+
+                    });
+                });
 
                 // Asignar avento keyup a cada elemento de la lista de busqueda
 
                 //document.querySelector("detalle").children[1];
 
-
-                
             } catch (error) {
                 document.querySelector(".search-results").innerHTML = ``;
-            }    
-            
-            
+            }
+
+
         }
 
 
         async function UltimaBoleta() {
 
-            const lista = await getData("./api-sias/comprobante/UltimaBoleta"); 
+            const lista = await getData("./api-sias/comprobante/UltimaBoleta");
             console.log(lista);
             lista.forEach(element => {
               document.querySelector("#numerocomp").value= element.numerocomp;
             });
-            
+
         }
+
 
 
 
         function addDetalle(){
 
-            const deta = document.querySelector("#detalle").children[1];
+           let deta = document.querySelector("#detalle").children[1];
 
             let textoHtml = `
             <tr">
                 <td>000</td>
                 <td>
-                    <div class="input-field">                    
+                    <div class="input-field">
                         <input class="search" placeholder="Buscar concepto">
                         <div class="search-results" style="padding-left: 5px;position: absolute;z-index: 900;width: 100%;background-color: white;">
-                            
+
                         </div>
-                    </div>                
+                    </div>
                 </td>
                 <td>
                     <input id="" type="number" class="right-align" value="">
-                </td> 
+                </td>
                 <td><input id="" type="text" class="right-align" value=""></td>
                 <td><input id="" type="text" class="right-align" value=""></td>
-                <td><input id="" type="text" value=""></td>                                                   
+                <td><input id="" type="text" value=""></td>
             </tr>`;
 
             deta.innerHTML += textoHtml;
 
-            
+
             const $search = document.querySelector(".search");
 
             $search.addEventListener('keyup',function(e){
@@ -203,61 +222,142 @@
             const deta = document.querySelector("#detalle").children[1];
             const numrow = deta.querySelectorAll('tr').length;
             deta.querySelectorAll('tr')[numrow-1].remove();
-        
+
             textoHtml = `
             <tr data-id="${id}" data-concepto="${concepto}" data-cant="${cant}" data-igv="${igv}" data-punit="${punit}" data-importe="${importe}">
                 <td>${id}</td>
                 <td>
-                    ${concepto}              
+                    ${concepto}
                 </td>
                 <td>
                     <input id="" type="number" class="right-align" value="${cant}">
-                </td> 
+                </td>
                 <td><input id="" type="text" class="right-align" value="${igv}"></td>
                 <td><input id="" type="text" class="right-align" value="${importe}"></td>
-                <td><input id="" type="text" value=""></td>                                                   
+                <td><input id="" type="text" value=""></td>
             </tr>`;
+
             deta.innerHTML += textoHtml;
 
             // Agregar evento de busqueda
 
-            
             const listacant = document.querySelector("#detalle").children[1].querySelectorAll("tr")
-            
+
             listacant.forEach(element => {
                 const $controlcant = element.children[2].querySelector("input");
-                
-                $controlcant.addEventListener("change", function() {                
+                const $controlimporte = element.children[4].querySelector("input");
+
+                $controlcant.addEventListener("change", function() {
                     calcularTotalConcepto(element);
                 });
 
-            });
-        
+                $controlimporte.addEventListener("keyup", function() {
+                    calcularTotalIgvItem(element);
+                });
 
+            });
+
+            calcularTotalGeneral()
+
+        }
+
+        function calcularTotalIgvItem(elemento){
+
+            elemento.dataset.importe = elemento.children[4].querySelector("input").value
+            elemento.dataset.igv = parseFloat((elemento.dataset.importe * 0.18) / 1.18).toFixed(2)
+
+            elemento.children[3].querySelector("input").value = elemento.dataset.igv
+            elemento.children[3].querySelector("input").setAttribute("value", elemento.dataset.igv)
+
+            calcularTotalGeneral()
 
         }
 
         function calcularTotalConcepto(elemento){
 
+            // Selecciona el data-cant del elemento tr de la tabla detalle
+
             elemento.dataset.cant = elemento.children[2].querySelector("input").value
             const ptotal = elemento.dataset.cant * elemento.dataset.punit
-            elemento.children[4].querySelector("input").value = ptotal
-            
+            elemento.dataset.importe = ptotal
+            elemento.dataset.igv = parseFloat((ptotal * 0.18) / 1.18).toFixed(2);
+
+            elemento.children[3].querySelector("input").value = elemento.dataset.igv
+            elemento.children[4].querySelector("input").value = ptotal.toFixed(2)
+
+            elemento.children[2].querySelector("input").setAttribute("value", elemento.dataset.cant)
+            elemento.children[3].querySelector("input").setAttribute("value", elemento.dataset.igv)
+            elemento.children[4].querySelector("input").setAttribute("value", ptotal.toFixed(2))
+
+            calcularTotalGeneral()
         }
 
-        // Eventos //
-        
-        const $codigo = document.querySelector("#codigo");  
+        function calcularTotalGeneral(){
+
+            const listafila = document.querySelector("#detalle").children[1].querySelectorAll("tr")
+            let sumatotal = 0.00;
+            let sumaigv = 0.00;
+
+            listafila.forEach(element => {
+                sumaigv += parseFloat(element.children[3].querySelector("input").value)
+                sumatotal += parseFloat(element.children[4].querySelector("input").value)
+            });
+
+            document.querySelector("#totaligvac").value = sumaigv.toFixed(2)
+            document.querySelector("#totalgeneac").value = sumatotal.toFixed(2)
+        }
+
+        async function addCabeceraComprobante(){
+
+            const data = document.querySelector("#form3")
+            const form = new FormData(data)
+
+            // Fecha hoy
+            var d = new Date();
+            var n = d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + (d.getDate())).slice(-2);
+            form.append("fechcance",n)
+                        
+            for(const key of form.keys()){
+                console.log(`${key} => ${form.get(key)}`)
+            }
+
+            const {Respuesta :
+                        { Id }
+                    } = await postData("./api-sias/comprobante/add",form);
+
+            //console.log(Id)
+            
+            addDetalleComprobante(Id)
+        }
+
+        async function addDetalleComprobante(IdComprobante){
+
+            const form = new FormData()
+            form.append('Comprobante_ID','283417')
+            form.append('ConceptoCobro_ID','283417')
+            form.append('Comprobante_ID','283417')
+            form.append('Comprobante_ID','283417')
+            form.append('Comprobante_ID','283417')
+
+            const listafila = document.querySelector("#detalle").children[1].querySelectorAll("tr")   
+            listafila.forEach(element => {
+                
+            });
+        }
+
+        // ======================= Eventos ========================//
+
+        const $codigo = document.querySelector("#codigo");
 
         $codigo.addEventListener("keydown",function(e){
 
-          if(e.which == 13){                 
+          if(e.which == 13){
             BuscarCodigo(this.value);
           }
-                      
+
         });
 
-        
+
         document.querySelector('select[name="cbotc"]').onchange = async function (event) {
             if(!event.target.value){
                 alert("Seleccione un valor");
@@ -273,36 +373,54 @@
         }
 
 
-        const $btnadd = document.querySelector("#btnAgregar");  
+        const $btnadd = document.querySelector("#btnAgregar");
 
-        $btnadd.addEventListener("click",function(e){            
-
-            //addDetalle('22', 'Clases de natación', 12, 0.18, 1.18);
+        $btnadd.addEventListener("click",function(e){
             addDetalle();
-            
         });
 
-    
-        // Cargado de controles //
-  
+        
+        const inputs = document.querySelectorAll("form")
+        inputs.forEach(element => {
+            element.addEventListener("keypress",function(e){
+                var keyCode = e.keyCode || e.which;
+                if (keyCode === 13) { 
+                    e.preventDefault();
+                    return false;
+                }
+            })    
+        });
+
+        
+        const $form3 = document.querySelector("#form3")
+
+        $form3.addEventListener("submit",function (e){
+
+            e.preventDefault()
+
+            //alert(document.querySelector("#cbotc").value)
+            addCabeceraComprobante()            
+
+        })
+
+        // ======================= Cargado de controles ========================//
+
         await CargaTipoComprobante();
         await CargaEstadoComprobante();
         await CargaTipoCobro();
-        
 
         //----------------------//
 
-
         $('select').formSelect();
-        $('.sidenav').sidenav();    
+        $('.sidenav').sidenav();
         $('.tabs').tabs();
-    
 
-  
-  
+
+
+
   })();
-  
-  
+
+
 
 
 

@@ -6,7 +6,7 @@
         private $dbuser = 'sa';
         private $dbpass = '';
 		//private $dbpass = 'C1rc0l0';
-        private $dbname = 'BDCSI';
+        private $dbname = 'BDPRUEBA';
 
         // Connect
         public function connect(){
