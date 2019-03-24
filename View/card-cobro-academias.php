@@ -124,24 +124,27 @@
 
 
                     </div>
-
                         
                     </div>
 
                     <div class="row">
 
-                    </div>
-                    
-                    <br>
+                        <div class="col s12 m4 l4">
+                            <a id="btnAgregar" href="JavScript:void(0)" class="waves-effect waves-light btn" style="width: 100%;background-color: white;">                            
+                            <span style="color: #4CAF50;">+ Agregar concepto</span>
+                            </a>                            
+                        </div>
+
+                    </div>                    
+
+
 
                     <div class="row">
                         
                         <div class="col s12 m4 l4">
-                            <a id="btnAgregar" href="JavScript:void()" class="waves-effect waves-light btn" style="width: 100%;background-color: white;">
-                            <!-- <i class="material-icons left" style="color: white !important;">add</i> -->
-                            <span style="color: #4CAF50;">+ Agregar concepto</span>
-                            </a>
-                            <!-- transform: translate(-120px,0px); <a href="#" class="waves-effect waves-light btn" style="width: 100%;background-color: #4CAF50;">Agregar concepto</a> -->
+                            <a id="btnImprimir" href="JavScript:void(0)" class="waves-effect waves-light btn" style="width: 100%;background-color: white;">                            
+                            <span style="color: #4CAF50;">Imprimir</span>
+                            </a>                            
                         </div>
                         <div class="col s12 m8 l8">
                             <button id="btnRegistrar3" type="submit" class="waves-effect waves-light btn" style="width: 100%;background-color: #4CAF50;">Registrar cobranza</button>

@@ -196,6 +196,33 @@ $app->get('/api-sias/boleta/tipoboleta',  function(Request $request, Response $r
     }
     
  });
+
+ $app->get('/api-sias/comprobante/UltimaFactura',  function(Request $request, Response $response) { 
+    
+    
+    $sql="SELECT max(numfac) + 1 as numerocomp from factura where tipo='E'";
+     
+    try{
+        
+         // Get DB Object
+         $db = new db();
+         // Connect
+         $db = $db->connect();
+         $stmt = $db->query($sql);
+         $resultado = $stmt->fetchAll(PDO::FETCH_OBJ);
+         $db = null;
+         
+         if(count($resultado)>0){
+             echo json_encode($resultado); 
+         }else{
+             echo json_encode("Objeto vacio"); 
+         }
+            
+    } catch(PDOException $e){
+         echo '{"error": {"text": '.$e->getMessage().'}';
+    }
+    
+ });
  
  // Insertar Comprobante
 
@@ -213,10 +240,13 @@ $app->get('/api-sias/boleta/tipoboleta',  function(Request $request, Response $r
     $TipoCobro_id = $request->getParam('cbotcob');
     $Usuario = $request->getParam('Usuario');
     
-//    $sql = "INSERT INTO Encuesta (Id_enc,Enc,P1,P1_OTRO,P2,P3)  values($Id_enc,$Enc,$P1,'$P1_OTRO',$P2,$P3)";
-
-    $sql = "INSERT INTO Comprobante (TipoComprobante_id, Cliente_ID, fechcance, igv , total, valorCambio, EstadoComprobante_ID, TipoCobro_id, Usuario) 
-    VALUES ('$TipoComprobante_id', '$Cliente_ID', '$fechcance', '$igv' , '$total', '$valorCambio', '$EstadoComprobante_ID', '$TipoCobro_id', '$Usuario')";
+    if($EstadoComprobante_ID=='C'){
+        $sql = "INSERT INTO Comprobante (TipoComprobante_id, Cliente_ID, fechcance, igv , total, valorCambio, EstadoComprobante_ID, TipoCobro_id, Usuario) 
+                VALUES ('$TipoComprobante_id', '$Cliente_ID', getDate() , '$igv' , '$total', '$valorCambio', '$EstadoComprobante_ID', '$TipoCobro_id', '$Usuario')";
+    }else{
+        $sql = "INSERT INTO Comprobante (TipoComprobante_id, Cliente_ID, igv , total, valorCambio, EstadoComprobante_ID, TipoCobro_id, Usuario) 
+                VALUES ('$TipoComprobante_id', '$Cliente_ID', '$igv' , '$total', '$valorCambio', '$EstadoComprobante_ID', '$TipoCobro_id', '$Usuario')";
+    }
 
     try{
         // Get DB Object
@@ -250,11 +280,9 @@ $app->get('/api-sias/boleta/tipoboleta',  function(Request $request, Response $r
     $cantidad = $request->getParam('cantidad');
     $importe = $request->getParam('importe');
     $observa = $request->getParam('observa');
-    
-//    $sql = "INSERT INTO Encuesta (Id_enc,Enc,P1,P1_OTRO,P2,P3)  values($Id_enc,$Enc,$P1,'$P1_OTRO',$P2,$P3)";
 
-    $sql = "INSERT INTO DetaComprobante (TipoComprobante_id, Cliente_ID, fechcance, igv , total, valorCambio, EstadoComprobante_ID, TipoCobro_id, Usuario) 
-    VALUES ('$TipoComprobante_id', '$Cliente_ID', '$fechcance', '$igv' , '$total', '$valorCambio', '$EstadoComprobante_ID', '$TipoCobro_id', '$Usuario')";
+    $sql = "INSERT INTO DetaComprobante (Comprobante_ID, ConceptoCobro_ID, cantidad, importe , observa) 
+    VALUES ('$Comprobante_ID', '$ConceptoCobro_ID', '$cantidad', '$importe' , '$observa')";
 
     try{
         // Get DB Object
@@ -277,5 +305,39 @@ $app->get('/api-sias/boleta/tipoboleta',  function(Request $request, Response $r
     }
 
 });
+
+ // Insertar boleta
+
+ $app->post('/api-sias/boleta/add', function(Request $request, Response $response){
+
+    $Comprobante_ID = $request->getParam('Comprobante_ID');
+    $numbol = $request->getParam('numbol');
+    $serie = $request->getParam('serie');
+    //$tipo = $request->getParam('tipo');    
+
+    $sql = "INSERT INTO boleta (Comprobante_ID, numbol, serie, tipo) 
+    VALUES ('$Comprobante_ID', '$numbol', '$serie', 'BE')";
+
+    try{
+        // Get DB Object
+        $db = new db();
+        // Connect
+        $db = $db->connect();
+        $stmt = $db->prepare($sql);
+
+        if($stmt->execute())
+        {
+
+            $ucod=$db->lastInsertId();         
+            echo '{ "Respuesta" : [{ "Id" : "' . $ucod .'" , "insert" : true }]}';
+            //echo json_encode(TRUE);
+        }
+    
+    } catch(PDOException $e){
+        echo '{"error": {"text":  ' . $e->getMessage() . '}';
+    }
+
+});
+ 
  
 

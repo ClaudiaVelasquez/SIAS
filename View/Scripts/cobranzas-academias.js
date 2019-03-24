@@ -176,6 +176,14 @@
 
         }
 
+        async function UltimaFactura() {
+
+            const lista = await getData("./api-sias/comprobante/UltimaFactura");            
+            lista.forEach(element => {
+              document.querySelector("#numerocomp").value= element.numerocomp;
+            });
+
+        }
 
 
 
@@ -310,6 +318,7 @@
         async function addCabeceraComprobante(){
 
             const data = document.querySelector("#form3")
+            const numboleta = document.querySelector("#numerocomp").value
             const form = new FormData(data)
 
             // Fecha hoy
@@ -320,29 +329,47 @@
             for(const key of form.keys()){
                 console.log(`${key} => ${form.get(key)}`)
             }
-
+            
             const {Respuesta :
                         { Id }
                     } = await postData("./api-sias/comprobante/add",form);
 
-            //console.log(Id)
-            
-            addDetalleComprobante(Id)
+            console.log(Id)
+            debugger
+            await addDetalleComprobante(Id)
+            await addBoleta(Id,numboleta,1)
         }
 
         async function addDetalleComprobante(IdComprobante){
 
-            const form = new FormData()
-            form.append('Comprobante_ID','283417')
-            form.append('ConceptoCobro_ID','283417')
-            form.append('Comprobante_ID','283417')
-            form.append('Comprobante_ID','283417')
-            form.append('Comprobante_ID','283417')
-
             const listafila = document.querySelector("#detalle").children[1].querySelectorAll("tr")   
-            listafila.forEach(element => {
+            
+            listafila.forEach(async element => {
+
+                const form = new FormData()
+                form.append('Comprobante_ID', IdComprobante)
+                form.append('ConceptoCobro_ID', element.dataset.id)
+                form.append('cantidad', element.dataset.cant)
+                form.append('importe', element.dataset.importe)
+                form.append('observa','')
+
+                await postData("./api-sias/detacomprobante/add",form)
                 
             });
+
+            //alert(`Comprobante registrado: ${IdComprobante}`)
+            swal("Comprobante registrado", `Número de comprobante registrado: ${IdComprobante}`, "success");
+        }
+
+        async function addBoleta(IdComprobante, numboleta, serie){
+
+            const form = new FormData()
+            form.append('Comprobante_ID', IdComprobante)
+            form.append('numbol', numboleta)
+            form.append('serie', serie)
+            await postData("./api-sias/boleta/add",form)
+
+            console.log("Se insertó boleta")
         }
 
         // ======================= Eventos ========================//
@@ -358,14 +385,16 @@
         });
 
 
-        document.querySelector('select[name="cbotc"]').onchange = async function (event) {
+        document.querySelector('select[name="cbotc"]').onchange = function (event) {
             if(!event.target.value){
                 alert("Seleccione un valor");
             }else{
 
                 switch (parseInt(event.target.value)) {
                     case 1:
-                        await UltimaBoleta();
+                        UltimaBoleta()
+                    case 2:
+                        UltimaFactura()    
                     default:
                         break;
                 }
