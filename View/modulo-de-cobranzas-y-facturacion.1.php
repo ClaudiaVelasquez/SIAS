@@ -162,11 +162,126 @@
         
         <!-- inicio de card 2 -->
     
-        <?php 
-            include './View/card-cobro-academias.php';
-        ?>
-        
-        
+        <div class="card white">
+            <div class="card-content">
+                <!--<span class="card-title center-align" style="border-left: 7px solid #e85b21;border-right: 7px solid #e85b21;">INGRESAR</span>-->
+                <span class="card-title" style="color: #f39c12;padding-bottom: 10px;"></span>
+                
+                    <div class="row">
+                       
+
+                        <div class="input-field col l4 s12">
+
+                            <i class="material-icons prefix">business</i>
+                            <input type="text" id="autocomplete-inputx" class="autocomplete">
+                            <label for="autocomplete-inputx">Ingrese código de proyecto</label>
+
+                        </div>
+
+                        <div class="input-field col l8 s12">
+                            <!-- <i class="material-icons prefix">business</i> -->
+                            <input id="icon_telephone" type="text" class="validate" disabled>
+                            <label for="icon_telephone">Nombre de proyecto</label>
+                        </div>                
+                        
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col s12 m12">
+
+                            <ul class="collection with-header">
+                                <li class="collection-header"><h5>Lista de preguntas</h5></li>
+                                <li class="collection-item">
+                                    <label>                
+                                        <input id="task1" type="checkbox" class="filled-in"/>
+                                        <span>P1. Calidad de la recepción</span>
+                                        <a href="#" class="secondary-content"><span class="ultra-small">Ver repuesta</span></a>
+                                    </label>
+                                </li>
+                                <li class="collection-item">
+                                    <label>                
+                                        <input id="task1" type="checkbox" class="filled-in"/>
+                                        <span>P2. ¿El personal comprendió su solicitud sin dificultad?</span>
+                                        <a href="#" class="secondary-content"><span class="ultra-small">Ver repuesta</span></a>
+                                    </label>
+                                </li>
+                                <li class="collection-item">
+                                    <label>                
+                                        <input id="task1" type="checkbox" class="filled-in"/>
+                                        <span>P3. ¿El personal ofreció otros productos, promociones y/o ofertas además de su solicitud inicial?</span>
+                                        <a href="#" class="secondary-content"><span class="ultra-small">Ver repuesta</span></a>
+                                    </label>
+                                </li>
+                                <li class="collection-item">
+                                    <label>                
+                                        <input id="task1" type="checkbox" class="filled-in"/>
+                                        <span>P4. ¿El personal tenía conocimiento de los productos, promociones y/o ofertas que se brindan en el local?</span>
+                                        <a href="#" class="secondary-content"><span class="ultra-small">Ver repuesta</span></a>
+                                    </label>
+                                </li>
+
+                                <li class="collection-item">
+                                    <label>                
+                                        <input id="task1" type="checkbox" class="filled-in"/>
+                                        <span>P5. ¿El personal interrumpió su atención por una llamada telefónica, compañero de trabajo u otra situación que no corresponde; y no se disculpó?</span>
+                                        <!-- <a href="#" class="secondary-content"><span class="ultra-small">Pregunta</span></a> -->
+                                    </label>
+                                </li>
+
+                                <li class="collection-item">
+                                    <label>                
+                                        <input id="task1" type="checkbox" class="filled-in"/>
+                                        <span>P6. ¿El personal le indicó un tiempo aproximado estimado de espera para recibir su orden o servicio?</span>
+                                        <a href="#" class="secondary-content"><span class="ultra-small">Ver repuesta</span></a>
+                                    </label>
+                                </li>
+
+                                <li class="collection-item">
+                                    <label>                
+                                        <input id="task1" type="checkbox" class="filled-in"/>
+                                        <span>P7. ¿El personal fue amable durante su atención?</span>
+                                        <a href="#" class="secondary-content"><span class="ultra-small">Ver repuesta</span></a>
+                                    </label>
+                                </li>
+
+                                <li class="collection-item">
+                                    <label>                
+                                        <input id="task1" type="checkbox" class="filled-in"/>
+                                        <span>P8. Durante su atención ¿El personal fue seguro en sus respuestas?</span>
+                                        <a href="#" class="secondary-content"><span class="ultra-small">Ver repuesta</span></a>
+                                    </label>
+                                </li>
+
+                            </ul>
+
+                                                    
+                        </div>
+
+
+                    </div>
+                    
+                    <br>
+
+                    <div class="row">
+                        
+                        <div class="col s12 m4 l4">
+                            <!-- <a href="#" class="waves-effect waves-light btn" style="width: 100%;background-color: #1b479a;">Agregar fila</a> -->
+                        </div>
+
+                        <div class="col s12 m4 l4">
+                                <a href="#" class="waves-effect waves-light btn" style="width: 100%;background-color: #f39c12;">Crear cuestionario</a>
+                        </div>
+                        <div class="col s12 m4 l4">
+                                <a href="./pautas-e-indicaciones" class="waves-effect waves-light btn disabled" style="width: 100%;background-color: #f39c12;">Borrar cuestionario</a>
+                        </div>
+                                             
+                    </div>
+
+            </div>
+
+        </div>
+
         <!-- Fin de card 2 -->
 
 
@@ -177,7 +292,7 @@
          <!--  Card de cobranzas -->
 
             <?php 
-            include './View/card-cobro-academias.php';
+            include_once './View/card-cobro-academias.php';
             ?>
         
     </div>

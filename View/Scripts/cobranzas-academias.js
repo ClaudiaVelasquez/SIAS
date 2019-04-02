@@ -109,12 +109,18 @@
                     document.querySelector("#dni").value = element.nrodoc;
                 });
 
+                document.querySelector("#btnAgregar").disabled = false                
+                document.querySelector("#btnRegistrar3").disabled = false
+
             } catch (error) {
 
                 // alert("No se encontró el código")
-
-                swal("Algo salió mal", "No se encontró el código", "warning");
-
+                                
+                swal("Algo salió mal", "No se encontró el código", "warning").then(function(){
+                    document.querySelector("#btnAgregar").disabled = true                
+                    document.querySelector("#btnRegistrar3").disabled = true
+                    document.querySelector("#codigo").focus()
+                });                
             }
 
         }
@@ -131,7 +137,7 @@
                 const $searchresults = document.querySelector(".search-results");
 
                 lista.forEach(element => {
-                    txthml +=  `<a data-id="${element.ConceptoCobro_ID}" data-nomcobro="${element.nomcobro}" data-costosoc="${element.costosoc}" data-costonso="${element.costonso}" style="display: block; padding: 10px 0 10px 0;border-bottom: 1px solid #999999" href="javascript:void(0)">${element.nomcobro}</a>`;
+                    txthml +=  `<a data-id="${element.ConceptoCobro_ID}" data-nomcobro="${element.nomcobro}" data-costosoc="${element.costosoc}" data-costonso="${element.costonso}" data-moneda="${element.Moneda_ID}" style="display: block; padding: 10px 0 10px 0;border-bottom: 1px solid #999999" href="javascript:void(0)">${element.nomcobro}</a>`;
                 });
 
                 $searchresults.innerHTML = txthml;
@@ -145,10 +151,10 @@
 
                         if(tipocliente===1){
                             let igv = parseFloat((element.dataset.costosoc * 0.18) / 1.18).toFixed(2);
-                            setDetalle(element.dataset.id, element.dataset.nomcobro, 1, igv, element.dataset.costosoc, element.dataset.costosoc);
+                            setDetalle(element.dataset.id, element.dataset.nomcobro, 1, igv, element.dataset.costosoc, element.dataset.costosoc, element.dataset.moneda);
                         }else{
                             let igv = parseFloat((element.dataset.costonso * 0.18) / 1.18).toFixed(2);
-                            setDetalle(element.dataset.id, element.dataset.nomcobro, 1, igv, element.dataset.costonso, element.dataset.costonso);
+                            setDetalle(element.dataset.id, element.dataset.nomcobro, 1, igv, element.dataset.costonso, element.dataset.costonso, element.dataset.moneda);
                         }
 
                     });
@@ -225,14 +231,14 @@
 
         }
 
-        function setDetalle(id,concepto,cant,igv,punit,importe){
+        async function setDetalle(id,concepto,cant,igv,punit,importe,moneda){
 
             const deta = document.querySelector("#detalle").children[1];
             const numrow = deta.querySelectorAll('tr').length;
             deta.querySelectorAll('tr')[numrow-1].remove();
 
             textoHtml = `
-            <tr data-id="${id}" data-concepto="${concepto}" data-cant="${cant}" data-igv="${igv}" data-punit="${punit}" data-importe="${importe}">
+            <tr data-id="${id}" data-concepto="${concepto}" data-cant="${cant}" data-igv="${igv}" data-punit="${punit}" data-importe="${importe}" data-moneda="${moneda}">
                 <td>${id}</td>
                 <td>
                     ${concepto}
@@ -266,6 +272,15 @@
             });
 
             calcularTotalGeneral()
+            
+            if(listacant.length==1 && moneda=="D"){
+                
+                const lista = await getData("./api-sias/tipocambio");            
+                lista.forEach(element => {
+                document.querySelector("#tcambio").value = element.valor;
+                });
+                
+            }                        
 
         }
 
@@ -315,10 +330,17 @@
             document.querySelector("#totalgeneac").value = sumatotal.toFixed(2)
         }
 
+
         async function addCabeceraComprobante(){
 
             const data = document.querySelector("#form3")
-            const numboleta = document.querySelector("#numerocomp").value
+            const numcomp = document.querySelector("#numerocomp").value
+            const tc = document.querySelector('select[name="cbotc"]').value
+
+            const subTotal = parseFloat(document.querySelector("#totalgeneac").value) - parseFloat(document.querySelector("#totaligvac").value)
+            const igv = document.querySelector("#totaligvac").value            
+            document.querySelector("#btnRegistrar3").disabled = true            
+
             const form = new FormData(data)
 
             // Fecha hoy
@@ -335,9 +357,26 @@
                     } = await postData("./api-sias/comprobante/add",form);
 
             console.log(Id)
+            
             debugger
+
             await addDetalleComprobante(Id)
-            await addBoleta(Id,numboleta,1)
+                                            
+            switch (parseInt(tc)) {
+                case 1:
+                    addBoleta(Id,numcomp,1)                    
+                    break;
+                case 2:
+                    addFactura(Id,numcomp,subTotal,igv)
+                    break;
+                default:
+                        break;
+
+            }
+
+            document.querySelector("#IdComprobante").value = Id
+            document.querySelector("#btnImprimir3").disabled = false
+            
         }
 
         async function addDetalleComprobante(IdComprobante){
@@ -355,7 +394,7 @@
 
                 await postData("./api-sias/detacomprobante/add",form)
                 
-            });
+            })
 
             //alert(`Comprobante registrado: ${IdComprobante}`)
             swal("Comprobante registrado", `Número de comprobante registrado: ${IdComprobante}`, "success");
@@ -368,9 +407,22 @@
             form.append('numbol', numboleta)
             form.append('serie', serie)
             await postData("./api-sias/boleta/add",form)
-
+            //UltimaBoleta()
             console.log("Se insertó boleta")
         }
+
+        async function addFactura(IdComprobante, numfactura, subTotal, igv){
+
+            const form = new FormData()
+            form.append('Comprobante_ID', IdComprobante)
+            form.append('numfac', numfactura)
+            form.append('subTotal', subTotal)
+            form.append('igv', igv)
+            await postData("./api-sias/factura/add",form)
+            //UltimaFactura()
+            console.log("Se insertó factura")
+        }
+
 
         // ======================= Eventos ========================//
 
@@ -390,11 +442,15 @@
                 alert("Seleccione un valor");
             }else{
 
+                document.querySelector("#numerocomp").value =""
+
                 switch (parseInt(event.target.value)) {
                     case 1:
                         UltimaBoleta()
+                        break;
                     case 2:
                         UltimaFactura()    
+                        break;
                     default:
                         break;
                 }
@@ -423,12 +479,35 @@
         
         const $form3 = document.querySelector("#form3")
 
-        $form3.addEventListener("submit",function (e){
+        $form3.addEventListener("submit", async function (e){
 
             e.preventDefault()
 
-            //alert(document.querySelector("#cbotc").value)
-            addCabeceraComprobante()            
+            const valor = await swal("¿Confirma registrar el comprobante?", {            
+                buttons: true, 
+                icon: "warning"            
+              })
+    
+              if (valor) {
+                //postData(url,form) 
+                addCabeceraComprobante()            
+              }              
+
+        })
+
+        const $btnnuevo = document.querySelector("#btnNuevo")
+
+        $btnnuevo.addEventListener("click", function (e){
+            alert("Boton nuevo")
+            document.querySelector('#cbotc option[value="4"]').value
+            
+        })
+
+        const $btnimprimir = document.querySelector("#btnImprimir3")
+
+        $btnimprimir.addEventListener("click", function(e){
+
+            PrintFinal()
 
         })
 
@@ -437,6 +516,10 @@
         await CargaTipoComprobante();
         await CargaEstadoComprobante();
         await CargaTipoCobro();
+        
+        document.querySelector("#btnAgregar").disabled = true
+        document.querySelector("#btnImprimir3").disabled = true
+        document.querySelector("#btnRegistrar3").disabled = true
 
         //----------------------//
 

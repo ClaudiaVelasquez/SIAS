@@ -70,8 +70,8 @@ $app->get('/proyectos-asignados',  function(){
     include_once 'View/gestor-de-proyectos.php';  
  });
 
- $app->get('/mantenimiento-entidades-establecimientos',  function(){  
-    include_once 'View/mantenimiento-entidades-establecimientos.php';  
+ $app->get('/comprobante-print',  function(){  
+    include_once 'View/comprobante-print.php';  
  });
 
  $app->get('/gestor-de-evaluaciones',  function(){  
