@@ -33,6 +33,7 @@ $app->get('/api-sias/boleta/tipoboleta',  function(Request $request, Response $r
          
          if(count($resultado)>0){
              echo json_encode($resultado); 
+             //echo $resultado; 
          }else{
              echo json_encode("Objeto vacio"); 
          }
@@ -473,3 +474,71 @@ $app->get('/api-sias/tipocambio',  function(Request $request, Response $response
     
  });
  
+
+ $app->get('/api-sias/getToken',  function(){  
+
+    # data needs to be POSTed to the Play url as JSON.
+    # (some code from http://www.lornajane.net/posts/2011/posting-json-data-with-php-curl)
+        $data = array("username" => "20167858067", "password" => "cee8c5a93de87a307472496b67655f6e1a02751ef40e50bac6c84bfab9388bc1", "grant_type" => "password");
+        $data_string = json_encode($data);
+
+        $ch = curl_init("https://ose-gw1.efact.pe:443/api-efact-ose/oauth/token?grant_type=password&username=20167858067&password=cee8c5a93de87a307472496b67655f6e1a02751ef40e50bac6c84bfab9388bc1");
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLINFO_HEADER_OUT, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        //curl_setopt($ch, CURLOPT_POSTFIELDS,  $data_string);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Authorization: Basic Y2xpZW50OnNlY3JldA==',
+            'Content-Type: application/x-www-form-urlencoded',
+            'grant_type=client_credentials&client_id=client&client_secret=secret'
+            )
+        );
+
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
+        //execute post
+        $result = curl_exec($ch);
+
+        if(curl_errno($ch)){
+            echo 'Request Error:' . curl_error($ch);
+        }
+
+        curl_close($ch);
+        //echo json_encode($result);
+        echo $result;
+
+});
+ 
+$app->post('/api-sias/comprobantes/upload', function(Request $request, Response $response){
+
+    $Comprobante_ID = $request->getParam('Comprobante_ID');
+    $numfac = $request->getParam('numfac');
+    $subTotal = $request->getParam('subTotal');
+    $igv = $request->getParam('igv');
+    //$tipo = $request->getParam('tipo');    
+
+    $sql = "INSERT INTO factura (Comprobante_ID, numfac, subTotal, igv, Tipo, serie) 
+    VALUES ('$Comprobante_ID', '$numfac', '$subTotal', '$igv', 'E', 1)";
+
+    try{
+        // Get DB Object
+        $db = new db();
+        // Connect
+        $db = $db->connect();
+        $stmt = $db->prepare($sql);
+
+        if($stmt->execute())
+        {
+
+            //$ucod=$db->lastInsertId();         
+            echo '{ "Respuesta" : [{ "Id" : "' . $Comprobante_ID .'" , "insert" : true }]}';
+            //echo json_encode(TRUE);
+        }
+    
+    } catch(PDOException $e){
+        echo '{"error": {"text":  ' . $e->getMessage() . '}';
+    }
+
+});

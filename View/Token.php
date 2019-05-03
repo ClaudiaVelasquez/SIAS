@@ -24,13 +24,8 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 // curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
 // curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
 // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-// curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-//     'Authorization: Basic Y2xpZW50OnNlY3JldA==',
-//     'Content-Type: application/x-www-form-urlencoded')
-// );
 // curl_setopt($ch, CURLOPT_TIMEOUT, 5);
 // curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
-
 //curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
 //curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
@@ -43,7 +38,7 @@ if(curl_errno($ch)){
     echo 'Request Error:' . curl_error($ch);
 }
 
-//close connection
+
 curl_close($ch);
 
 echo json_encode($result);

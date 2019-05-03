@@ -1,3 +1,5 @@
+let getUrl = window.location;
+const baseurl =  getUrl.origin + '/' +getUrl.pathname.split('/')[1]; 
 
 
  document.addEventListener("DOMContentLoaded",function(){
@@ -55,7 +57,7 @@
         async function CargaTipoComprobante() {
 
           const $tc = document.querySelector("#cbotc");
-          const lista = await getData("http://localhost:81/SIAS/api-sias/boleta/tipoboleta");
+          const lista = await getData(baseurl + "/api-sias/boleta/tipoboleta");
           let txthml = `<option value="" disabled selected>Seleccione comprobante</option>`;
 
           lista.forEach(element => {
@@ -69,7 +71,7 @@
         async function CargaEstadoComprobante() {
 
           const $tc = document.querySelector("#cboec");
-          const lista = await getData("http://localhost:81/SIAS/api-sias/boleta/estadocomprobante");
+          const lista = await getData(baseurl + "/api-sias/boleta/estadocomprobante");
           let txthml = `<option value="" disabled selected>Seleccione</option>`;
 
           lista.forEach(element => {
@@ -83,7 +85,7 @@
         async function CargaTipoCobro() {
 
           const $tc = document.querySelector("#cbotcob");
-          const lista = await getData("http://localhost:81/SIAS/api-sias/boleta/tipocobro");
+          const lista = await getData(baseurl + "/api-sias/boleta/tipocobro");
           let txthml = `<option value="" disabled selected>Seleccione</option>`;
 
           lista.forEach(element => {
@@ -100,7 +102,7 @@
 
             try {
 
-                const lista = await getData("http://localhost:81/SIAS/api-sias/socio/BusquedaCodigo/" + codigo);
+                const lista = await getData(baseurl + "/api-sias/socio/BusquedaCodigo/" + codigo);
                 console.log(lista);
 
                 lista.forEach(element => {
@@ -131,7 +133,7 @@
 
                 // Cargar lista de conceptos //
 
-                const lista = await getData("http://localhost:81/SIAS/api-sias/concepto/BusquedaNombre/" + nombre);
+                const lista = await getData(baseurl + "/api-sias/concepto/BusquedaNombre/" + nombre);
 
                 let txthml = ``;
                 const $searchresults = document.querySelector(".search-results");

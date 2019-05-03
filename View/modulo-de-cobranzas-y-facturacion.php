@@ -90,10 +90,10 @@
     
         <div class="card white">
             <div class="card-content">
-                <!--<span class="card-title center-align" style="border-left: 7px solid #e85b21;border-right: 7px solid #e85b21;">INGRESAR</span>-->
+                
                 <span class="card-title" style="color: #f39c12;padding-bottom: 10px;"></span>
                 
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="input-field col l3 s12">
                             <i class="material-icons prefix">business</i>
                             <input id="icon_prefix" type="text" class="validate" disabled>
@@ -101,7 +101,7 @@
                         </div>
 
                         <div class="input-field col l9 s12">
-                            <!-- <i class="material-icons prefix">business</i> -->
+                            
                             <input id="icon_telephone" type="text" class="validate">
                             <label for="icon_telephone">Nombre de proyecto</label>
                         </div>
@@ -133,13 +133,13 @@
                             <option value="3">Suspendido</option>
                             </select>                        
                         </div>
-                        
+                         -->
                     </div>
                     
                     <br>
 
                     <div class="row">
-                        <div class="col s12 m4 l4">
+                        <!-- <div class="col s12 m4 l4">
                                 <a id="btn" href="#" class="waves-effect waves-light btn" style="width: 100%;background-color: #f39c12;">Registrar</a>
                         </div>
                         <div class="col s12 m4 l4">
@@ -147,7 +147,7 @@
                         </div>
                         <div class="col s12 m4 l4">
                                 <a href="./pautas-e-indicaciones" class="waves-effect waves-light btn" style="width: 100%;background-color: #f39c12;">Eliminar</a>
-                        </div>                        
+                        </div>                         -->
                     </div>
 
             </div>
