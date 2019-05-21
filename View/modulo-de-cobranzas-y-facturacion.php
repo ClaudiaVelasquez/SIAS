@@ -87,72 +87,24 @@
     <div id="test1" class="col s12">
 
         <!-- inicio de card -->
-    
+
         <div class="card white">
             <div class="card-content">
                 
                 <span class="card-title" style="color: #f39c12;padding-bottom: 10px;"></span>
-                
-                    <!-- <div class="row">
-                        <div class="input-field col l3 s12">
-                            <i class="material-icons prefix">business</i>
-                            <input id="icon_prefix" type="text" class="validate" disabled>
-                            <label for="icon_prefix">Código de proyecto</label>
-                        </div>
-
-                        <div class="input-field col l9 s12">
-                            
-                            <input id="icon_telephone" type="text" class="validate">
-                            <label for="icon_telephone">Nombre de proyecto</label>
-                        </div>
-
-                        <div class="input-field col s12 l6">
-                            <i class="material-icons prefix">date_range</i>
-                            <input type="text" class="datepicker"  placeholder="Fecha de inicio">            
-                        </div>
-
-                        <div class="input-field col s12 l6">
-                            <i class="material-icons prefix">date_range</i>
-                            <input type="text" class="datepicker"  placeholder="Fecha de fin">            
-                        </div>
-
-                        <div class="input-field col l6 s12">
-
-                            <i class="material-icons prefix">business_center</i>
-                            <input type="text" id="autocomplete-input" class="autocomplete">
-                            <label for="autocomplete-input">Cliente</label>
-
-                        </div>
-
-                        <div class="input-field col l6 s12">
-                            <i class="material-icons prefix">explicit</i>
-                            <select>
-                            <option value="" disabled selected>Seleccione estado del proyecto</option>
-                            <option value="1">En curso</option>
-                            <option value="2">Terminado</option>
-                            <option value="3">Suspendido</option>
-                            </select>                        
-                        </div>
-                         -->
-                    </div>
-                    
-                    <br>
-
-                    <div class="row">
-                        <!-- <div class="col s12 m4 l4">
-                                <a id="btn" href="#" class="waves-effect waves-light btn" style="width: 100%;background-color: #f39c12;">Registrar</a>
-                        </div>
-                        <div class="col s12 m4 l4">
-                                <a href="./pautas-e-indicaciones" class="waves-effect waves-light btn" style="width: 100%;background-color: #f39c12;">Modificar</a>
-                        </div>
-                        <div class="col s12 m4 l4">
-                                <a href="./pautas-e-indicaciones" class="waves-effect waves-light btn" style="width: 100%;background-color: #f39c12;">Eliminar</a>
-                        </div>                         -->
-                    </div>
+            
+                <?php
+                   include './View/card-cuotas-sociales.php';
+                ?>
 
             </div>
+                    <br>
+                    <div class="row">
+                    </div>
 
         </div>
+
+    </div>
 
         <!-- Fin de card -->
     
