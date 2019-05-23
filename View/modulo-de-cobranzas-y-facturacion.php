@@ -131,7 +131,7 @@
          <!--  Card de cobranzas -->
 
             <?php 
-            include './View/card-cobro-academias.php';
+            // include './View/card-cobro-academias.php';
             ?>
         
     </div>
