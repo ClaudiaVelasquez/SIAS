@@ -176,7 +176,7 @@ const baseurl =  getUrl.origin + '/' +getUrl.pathname.split('/')[1];
 
         async function UltimaBoleta() {
 
-            const lista = await getData("./api-sias/comprobante/UltimaBoleta");
+            const lista = await getData(baseurl + "/api-sias/comprobante/UltimaBoleta");
             console.log(lista);
             lista.forEach(element => {
               document.querySelector("#numerocomp").value= element.numerocomp;
@@ -186,7 +186,7 @@ const baseurl =  getUrl.origin + '/' +getUrl.pathname.split('/')[1];
 
         async function UltimaFactura() {
 
-            const lista = await getData("./api-sias/comprobante/UltimaFactura");            
+            const lista = await getData(baseurl + "/api-sias/comprobante/UltimaFactura");            
             lista.forEach(element => {
               document.querySelector("#numerocomp").value= element.numerocomp;
             });
@@ -277,7 +277,7 @@ const baseurl =  getUrl.origin + '/' +getUrl.pathname.split('/')[1];
             
             if(listacant.length==1 && moneda=="D"){
                 
-                const lista = await getData("./api-sias/tipocambio");            
+                const lista = await getData(baseurl + "/api-sias/tipocambio");            
                 lista.forEach(element => {
                 document.querySelector("#tcambio").value = element.valor;
                 });
@@ -360,7 +360,7 @@ const baseurl =  getUrl.origin + '/' +getUrl.pathname.split('/')[1];
 
             console.log(Id)
             
-            debugger
+            
 
             await addDetalleComprobante(Id)
                                             
@@ -387,15 +387,15 @@ const baseurl =  getUrl.origin + '/' +getUrl.pathname.split('/')[1];
             
             listafila.forEach(async element => {
 
-                const form = new FormData()
+                let form = new FormData()
                 form.append('Comprobante_ID', IdComprobante)
                 form.append('ConceptoCobro_ID', element.dataset.id)
                 form.append('cantidad', element.dataset.cant)
                 form.append('importe', element.dataset.importe)
                 form.append('observa','')
-
-                await postData("./api-sias/detacomprobante/add",form)
                 
+                await postData("./api-sias/detacomprobante/add",form)
+                debugger
             })
 
             //alert(`Comprobante registrado: ${IdComprobante}`)
@@ -425,12 +425,31 @@ const baseurl =  getUrl.origin + '/' +getUrl.pathname.split('/')[1];
             console.log("Se insertó factura")
         }
 
+        async function LimpiarFormulario(){
+
+            document.querySelector("#form3").reset()
+
+            const lista = document.querySelector("#detalle").children[1].querySelectorAll("tr")
+            lista.forEach(element => {
+                element.remove()
+            });
+            
+            document.querySelector("#codigo").select()
+            document.querySelector("#nombres").select()
+            document.querySelector("#dni").select()
+            document.querySelector("#tcambio").select()
+            document.querySelector("#numerocomp").focus()
+            document.querySelector("#btnRegistrar3").disabled = true
+
+        }
+
 
         // ======================= Eventos ========================//
 
         const $codigo = document.querySelector("#codigo");
 
         $codigo.addEventListener("keydown",function(e){
+
 
           if(e.which == 13){
             BuscarCodigo(this.value);
@@ -500,9 +519,9 @@ const baseurl =  getUrl.origin + '/' +getUrl.pathname.split('/')[1];
         const $btnnuevo = document.querySelector("#btnNuevo")
 
         $btnnuevo.addEventListener("click", function (e){
-            alert("Boton nuevo")
-            document.querySelector('#cbotc option[value="4"]').value
-            
+            //alert("Boton nuevo")
+            //document.querySelector('#cbotc option[value="4"]').value
+            LimpiarFormulario()
         })
 
         const $btnimprimir = document.querySelector("#btnImprimir3")
