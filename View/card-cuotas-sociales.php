@@ -18,22 +18,21 @@
 
 
     <div class="row">
-        <form class="col s6">
+        <form class="col s8">
             <div class="row">
-                <div class="input-field col s8">
-                    <input placeholder="" id="first_name" type="text" class="validate">
-                    <label for="first_name">Código</label>
+                <div class="input-field col s10">
+                    <input placeholder="" id="" type="text" class="validate">
+                    <label for="">Código</label>
                 </div>
-                <a class="btn-floating btn-medium waves-effect waves-light" style="background-color:#1b479a;"><i class="material-icons" style="color:white;">search</i></a>
+                <a class="btn-floating btn-medium waves-effect waves-light" style="background-color:white;"><i class="material-icons" style="color:white;">search</i></a>
             </div>
         </form>
 
-        <form class="col s6" action="#">
-            
+        <form class="col s4" action="#">
                 <p>
                     <label>
                         <input type="checkbox" />
-                        <span>PAGO ANUAL</span>
+                        <span style="font-size:9pt;">PAGO ANUAL</span>
                     </label>
                 </p>
             
@@ -41,9 +40,9 @@
     </div>
 
     <div class="row">
-        <form class="col s4">
+        <form class="col s12">
             <div class="row">
-                <div class="input-field col s12">
+                <div class="input-field col s10">
                     <input placeholder="" id="first_name" type="text" class="validate">
                     <label for="first_name">Apellidos</label>
                 </div>
@@ -52,9 +51,9 @@
     </div>
 
     <div class="row">
-        <form class="col s4">
+        <form class="col s12">
             <div class="row">
-                <div class="input-field col s12">
+                <div class="input-field col s10">
                     <input placeholder="" id="first_name" type="text" class="validate">
                     <label for="first_name">Nombres</label>
                 </div>
@@ -65,14 +64,14 @@
     
     
     <div class="row">
-        <form class="col s6">
+        <form class="col s12">
             <div class="row">
-                <div class="input-field col s6">
+                <div class="input-field col s5">
                     <input placeholder="" id="categoria" type="text" class="validate">
                     <label for="first_name">Origen</label>
                 </div>
                 
-                <div class="input-field col s6">
+                <div class="input-field col s5">
                     <input placeholder="" id="categoria" type="text" class="validate">
                     <label for="first_name">Categoría</label>
                 </div>
@@ -81,9 +80,9 @@
     </div>
 
     <div class="row">
-        <form class="col s6">
+        <form class="col s12">
             <div class="row">
-                <div class="input-field col s6">
+                <div class="input-field col s5">
                     <input placeholder="" id="estado" type="text" class="validate">
                     <label for="first_name">Estado</label>
                 </div>
@@ -101,9 +100,9 @@
     </div>
 
     <div class="row">
-        <form class="col s6" action="">
+        <form class="col s12" action="">
             <div class="row">
-                <div class="input-field col s3">
+                <div class="input-field col s4">
                     <input placeholder="0" type="number" name="quantity" min="1" max="5">
                     <label for="coutas">Cuotas</label>
                 </div>
@@ -113,11 +112,13 @@
     
 </div>
 
+<!---/---->
+
 <div class="col s6">
     <div class="row">
         <form class="col s12">
             <div class="row">
-                <div class="input-field col s12">
+                <div class="input-field col s8">
                     <input placeholder="" id="first_name" type="text" class="validate">
                     <label for="first_name">Periodo</label>
                 </div>
@@ -128,7 +129,7 @@
     <div class="row">
         <form class="col s12">
             <div class="row">
-                <div class="input-field col s12">
+                <div class="input-field col s8">
                     <input placeholder="" id="first_name" type="text" class="validate">
                     <label for="first_name">Mes</label>
                 </div>
@@ -139,7 +140,7 @@
     <div class="row">
         <form class="col s12">
             <div class="row">
-                <div class="input-field col s12">
+                <div class="input-field col s8">
                     <input placeholder="" id="first_name" type="text" class="validate">
                     <label for="first_name">N° Boletas</label>
                 </div>
@@ -150,7 +151,7 @@
     <div class="row">
         <form class="col s12">
             <div class="row">
-                <div class="input-field col s3">
+                <div class="input-field col s4">
                     <input placeholder="" id="first_name" type="text" class="validate">
                     <label for="first_name">Imprimir las primeras</label>
                 </div>
