@@ -86,15 +86,6 @@
                     <input placeholder="" id="estado" type="text" class="validate">
                     <label for="first_name">Estado</label>
                 </div>
-                
-                <div class="col s3">
-                    <a class="waves-effect waves-light btn" style="background-color:#4CAF50;">Imprimir Boleta</a>
-                </div>
-
-                <div class="col s3">    
-                    <a class="waves-effect waves-light btn disabled">Cancelar Boleta</a>
-                </div>
-                
             </div>
         </form>
     </div>
@@ -106,10 +97,88 @@
                     <input placeholder="0" type="number" name="quantity" min="1" max="5">
                     <label for="coutas">Cuotas</label>
                 </div>
+
             </div>
+
+                 <div class="col s3">
+                    <a class="waves-effect waves-light btn" style="background-color:#4CAF50;">Imprimir Boleta</a>
+                </div>
+
+                <div class="col s3">    
+                    <a class="waves-effect waves-light btn disabled">Cancelar Boleta</a>
+                </div>
         </form>
     </div>
     
+    <div class="row">
+        <div class="col s12">
+            <ul class="tabs">
+                <li class="tab col s3"><a class="active" href="" style="font-size:8pt;">Cuotas social</a></li>
+                <li class="tab col s3"><a href="" style="font-size:8pt;">Boletas emitidas</a></li>
+                <li class="tab col s3"><a href="" style="font-size:8pt;">Boletas canceladas</a></li>
+                <li class="tab col s3"><a href="" style="font-size:8pt;">Refinanciamiento</a></li>
+            </ul>
+        </div>
+        
+        <table>
+            <thead>
+                <tr style="color:#1b479a;">
+                    <th>Cobrar</th>
+                    <th>Cuota</th>
+                    <th>Concept</th>
+                    <th>Monto</th>
+                    <th>Venci</th>
+                    <th>Interés</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <form action="#">
+                            <p>
+                                <label>
+                                    <input type="checkbox" />
+                                        <span></span>
+                                </label>
+                            </p>
+                        </form>
+                    </td>
+                    <td>b</td>
+                    <td>c</td>
+                </tr>
+                <tr>
+                    <td>
+                        <form action="#">
+                            <p>
+                                <label>
+                                    <input type="checkbox" />
+                                        <span></span>
+                                </label>
+                            </p>
+                        </form>
+                    </td>
+                
+                    <td>e</td>
+                    <td>f</td>
+                </tr>
+                <tr>
+                    <td>
+                        <form action="#">
+                            <p>
+                                <label>
+                                    <input type="checkbox" />
+                                        <span></span>
+                                </label>
+                            </p>
+                        </form>
+                    </td>
+                    <td>h</td>
+                    <td>i</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
 </div>
 
 <!---/---->
@@ -170,6 +239,63 @@
 
     </div>
 
+    <table>
+            <thead>
+                <tr style="color:#1b479a;">
+                    <th>Cobrar</th>
+                    <th>Cuota</th>
+                    <th>Concept</th>
+                    <th>Monto</th>
+                    <th>Venci</th>
+                    <th>Interés</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <form action="#">
+                            <p>
+                                <label>
+                                    <input type="checkbox" />
+                                        <span></span>
+                                </label>
+                            </p>
+                        </form>
+                    </td>
+                    <td>b</td>
+                    <td>c</td>
+                </tr>
+                <tr>
+                    <td>
+                        <form action="#">
+                            <p>
+                                <label>
+                                    <input type="checkbox" />
+                                        <span></span>
+                                </label>
+                            </p>
+                        </form>
+                    </td>
+                
+                    <td>e</td>
+                    <td>f</td>
+                </tr>
+                <tr>
+                    <td>
+                        <form action="#">
+                            <p>
+                                <label>
+                                    <input type="checkbox" />
+                                        <span></span>
+                                </label>
+                            </p>
+                        </form>
+                    </td>
+                    <td>h</td>
+                    <td>i</td>
+                </tr>
+            </tbody>
+        </table>
 
 
 
