@@ -3,10 +3,10 @@
 
 <input type="hidden" name="Usuario" value="JORGE.WINDER">
 
-<div class="col s12">
+<div class="col s6">
     <div class="row">
 
-        <div class="input-field col s4">
+        <div class="input-field col s3">
             <select>
                 <option value="" disabled selected>Choose your option</option>
                 <option value="1">Option 1</option>
@@ -15,19 +15,15 @@
             </select>
             <label>Operaciones</label>
         </div>
+
+          NRO BOLETA:
+          <div class="input-field inline col s3">
+            <input id="serie_inline" type="text" class="validate">
+            <label for="serie_inline">01</label>
+          </div>
         
-        <div class="input-field col s4">
-            <input type="text">
-                <label for="">NRO BOLETA</label>
-        </div>
     </div>
     
-    </div>
-    
-
-
-
-
     <div class="row">
         <form class="col s6">
             <div class="row">
@@ -204,7 +200,6 @@
                 </tr>
             </tbody>
         </table>
-
     </div>
 </div>
 
@@ -313,9 +308,6 @@
                 </tr>
             </tbody>
         </table>
-
-
-
 </div>
-</div>
+
                     
