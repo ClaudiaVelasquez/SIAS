@@ -3,9 +3,10 @@
 
 <input type="hidden" name="Usuario" value="JORGE.WINDER">
 
-<div class="col s6"> 
+<div class="col s12">
     <div class="row">
-        <div class="input-field col s12">
+
+        <div class="input-field col s4">
             <select>
                 <option value="" disabled selected>Choose your option</option>
                 <option value="1">Option 1</option>
@@ -14,21 +15,32 @@
             </select>
             <label>Operaciones</label>
         </div>
+        
+        <div class="input-field col s4">
+            <input type="text">
+                <label for="">NRO BOLETA</label>
+        </div>
     </div>
+    
+    </div>
+    
+
+
 
 
     <div class="row">
-        <form class="col s8">
+        <form class="col s6">
             <div class="row">
-                <div class="input-field col s10">
+                <div class="input-field col s9">
                     <input placeholder="" id="" type="text" class="validate">
                     <label for="">Código</label>
+                    
                 </div>
-                <a class="btn-floating btn-medium waves-effect waves-light" style="background-color:white;"><i class="material-icons" style="color:white;">search</i></a>
+                <a class="btn-floating btn-small waves-effect waves-light" style="background-color:white;"><i class="material-icons" style="color:white;">search</i></a>
             </div>
         </form>
 
-        <form class="col s4" action="#">
+        <form class="col s6" action="#">
                 <p>
                     <label>
                         <input type="checkbox" />
@@ -42,18 +54,12 @@
     <div class="row">
         <form class="col s12">
             <div class="row">
-                <div class="input-field col s10">
+                <div class="input-field col s6">
                     <input placeholder="" id="first_name" type="text" class="validate">
                     <label for="first_name">Apellidos</label>
                 </div>
-            </div>
-        </form>
-    </div>
 
-    <div class="row">
-        <form class="col s12">
-            <div class="row">
-                <div class="input-field col s10">
+                <div class="input-field col s6">
                     <input placeholder="" id="first_name" type="text" class="validate">
                     <label for="first_name">Nombres</label>
                 </div>
@@ -61,17 +67,15 @@
         </form>
     </div>
 
-    
-    
     <div class="row">
         <form class="col s12">
             <div class="row">
-                <div class="input-field col s5">
+                <div class="input-field col s6">
                     <input placeholder="" id="categoria" type="text" class="validate">
                     <label for="first_name">Origen</label>
                 </div>
                 
-                <div class="input-field col s5">
+                <div class="input-field col s6">
                     <input placeholder="" id="categoria" type="text" class="validate">
                     <label for="first_name">Categoría</label>
                 </div>
@@ -82,32 +86,44 @@
     <div class="row">
         <form class="col s12">
             <div class="row">
-                <div class="input-field col s5">
+                <div class="input-field col s4">
                     <input placeholder="" id="estado" type="text" class="validate">
                     <label for="first_name">Estado</label>
+                </div>
+                <div class="col s2">
+                
+                </div>
+                <div class="input-field col s2">
+                    <input placeholder="0" type="number" name="quantity" min="1" max="5">
+                    <label for="coutas">Cuotas</label>
                 </div>
             </div>
         </form>
     </div>
 
     <div class="row">
-        <form class="col s12" action="">
-            <div class="row">
-                <div class="input-field col s4">
-                    <input placeholder="0" type="number" name="quantity" min="1" max="5">
-                    <label for="coutas">Cuotas</label>
+            <div class="col s12"> 
+            <div class="row">       
+                <div class="col s3">
+                    <a class="waves-effect waves-light btn-large" style="background-color:#4CAF50; height:60px; line-height:20px; padding-top:9px;padding-left:25px;width:130px;">Imprimir Boleta</a>
                 </div>
+                
+                <div class="col s1">
+                </div>    
 
-            </div>
-
-                 <div class="col s3">
-                    <a class="waves-effect waves-light btn" style="background-color:#4CAF50;">Imprimir Boleta</a>
+                <div class="col s3">    
+                    <a class="waves-effect waves-light btn-large disabled" style="height:60px; line-height:20px; padding-top:9px; padding-left:25px;width:130px;">Cancelar Boleta</a>
+                </div>
+                <div class="col s1">
                 </div>
 
                 <div class="col s3">    
-                    <a class="waves-effect waves-light btn disabled">Cancelar Boleta</a>
+                    <a class="waves-effect waves-light btn-large disabled" style="height:60px; line-height:20px; padding-top:8px;padding-left:25px;width:130px;">Extornar cuotas</a>
                 </div>
-        </form>
+                <div class="col s1">
+                </div>  
+            </div>
+            </div>
     </div>
     
     <div class="row">
@@ -145,6 +161,9 @@
                     </td>
                     <td>b</td>
                     <td>c</td>
+                    <td>c</td>
+                    <td>c</td>
+                    <td>c</td>
                 </tr>
                 <tr>
                     <td>
@@ -160,6 +179,10 @@
                 
                     <td>e</td>
                     <td>f</td>
+                    <td>e</td>
+                    <td>f</td>
+                    <td>f</td>
+
                 </tr>
                 <tr>
                     <td>
@@ -174,6 +197,10 @@
                     </td>
                     <td>h</td>
                     <td>i</td>
+                    <td>h</td>
+                    <td>i</td>
+                    <td>i</td>
+
                 </tr>
             </tbody>
         </table>
@@ -181,24 +208,20 @@
     </div>
 </div>
 
-<!---/---->
+<!--/-->
+
 
 <div class="col s6">
     <div class="row">
+
+    
         <form class="col s12">
             <div class="row">
-                <div class="input-field col s8">
+                <div class="input-field col s6">
                     <input placeholder="" id="first_name" type="text" class="validate">
                     <label for="first_name">Periodo</label>
                 </div>
-            </div>
-        </form>
-    </div>
-
-    <div class="row">
-        <form class="col s12">
-            <div class="row">
-                <div class="input-field col s8">
+                <div class="input-field col s6">
                     <input placeholder="" id="first_name" type="text" class="validate">
                     <label for="first_name">Mes</label>
                 </div>
@@ -209,32 +232,26 @@
     <div class="row">
         <form class="col s12">
             <div class="row">
-                <div class="input-field col s8">
+                <div class="input-field col s3">
                     <input placeholder="" id="first_name" type="text" class="validate">
                     <label for="first_name">N° Boletas</label>
                 </div>
-            </div>
-        </form>
-    </div>
-
-    <div class="row">
-        <form class="col s12">
-            <div class="row">
-                <div class="input-field col s4">
+                <div class="input-field col s3">
                     <input placeholder="" id="first_name" type="text" class="validate">
                     <label for="first_name">Imprimir las primeras</label>
                 </div>
+
             </div>
         </form>
     </div>
 
     <div class="row">
         <div class="col s6">
-            <a class="waves-effect waves-light btn disabled" style="background-color:#4CAF50;">Consultar</a>
+            <a class="waves-effect waves-light btn-large disabled" style="background-color:#4CAF50;">Consultar</a>
         </div>
 
         <div class="col s6">    
-            <a class="waves-effect waves-light btn disabled">Imprimir Boletas</a>
+            <a class="waves-effect waves-light btn-large disabled" style="height:60px; line-height:20px; padding-top:8px;">Imprimir Boletas</a>
         </div>
 
     </div>
@@ -299,5 +316,6 @@
 
 
 
+</div>
 </div>
                     
